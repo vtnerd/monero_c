@@ -6,6 +6,7 @@
 #include <thread>
 #include "../../../../monero/src/wallet/api/wallet2_api.h"
 #include "../../../../lwsf/include/lws_frontend.h"
+#include "../../../../lwsf/src/wallet.h"
 #include "monero_checksum.h"
 
 #ifdef __cplusplus
@@ -1341,6 +1342,13 @@ bool MONERO_Wallet_setProxy(void* wallet_ptr, const char* address) {
     DEBUG_START()
     Monero::Wallet *wallet = reinterpret_cast<Monero::Wallet*>(wallet_ptr);
     return wallet->setProxy(std::string(address));
+    DEBUG_END()
+}
+
+void MONERO_Wallet_setCaFilePath(void* wallet_ptr, const char* path) {
+    DEBUG_START()
+    lwsf::internal::wallet *wallet = reinterpret_cast<lwsf::internal::wallet*>(wallet_ptr);
+    return wallet->setCaFilePath(std::string(path));
     DEBUG_END()
 }
 

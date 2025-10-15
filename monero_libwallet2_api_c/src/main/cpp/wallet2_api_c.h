@@ -574,6 +574,8 @@ extern ADDAPI void MONERO_Wallet_setTrustedDaemon(void* wallet_ptr, bool arg);
 extern ADDAPI bool MONERO_Wallet_trustedDaemon(void* wallet_ptr);
 //     virtual bool setProxy(const std::string &address) = 0;
 extern ADDAPI bool MONERO_Wallet_setProxy(void* wallet_ptr, const char* address);
+//     virtual void setCaFilePath(const std::string &path) = 0;
+extern ADDAPI void MONERO_Wallet_setCaFilePath(void* wallet_ptr, const char* path);
 //     virtual uint64_t balance(uint32_t accountIndex = 0) const = 0;
 extern ADDAPI uint64_t MONERO_Wallet_balance(void* wallet_ptr, uint32_t accountIndex);
 //     uint64_t balanceAll() const {

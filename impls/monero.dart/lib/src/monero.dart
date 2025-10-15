@@ -1376,6 +1376,11 @@ class MoneroWallet implements Wallet2Wallet {
   void setProxy({required String address}) {
     monero.Wallet_setProxy(walletPtr, address: address);
   }
+
+  @override
+  void setCaFilePath(String path) {
+    monero.Wallet_setCaFilePath(walletPtr, path);
+  }
   
   @override
   void setRecoveringFromDevice({required bool recoveringFromDevice}) {

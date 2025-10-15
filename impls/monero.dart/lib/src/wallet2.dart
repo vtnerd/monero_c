@@ -271,6 +271,7 @@ abstract class Wallet2Wallet {
   void setTrustedDaemon({required bool arg});
   bool trustedDaemon();
   void setProxy({required String address});
+  void setCaFilePath(String path);
   int balance({required int accountIndex});
   int unlockedBalance({required int accountIndex});
   int viewOnlyBalance({required int accountIndex});
