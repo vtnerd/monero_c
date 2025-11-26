@@ -1378,8 +1378,8 @@ class MoneroWallet implements Wallet2Wallet {
   }
 
   @override
-  void setCaFilePath(String path) {
-    monero.Wallet_setCaFilePath(walletPtr, path);
+  bool setCaFilePath(String path) {
+    return monero.Wallet_setCaFilePath(walletPtr, path);
   }
   
   @override

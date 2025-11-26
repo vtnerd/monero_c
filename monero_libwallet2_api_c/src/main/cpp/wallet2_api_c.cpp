@@ -1345,10 +1345,14 @@ bool MONERO_Wallet_setProxy(void* wallet_ptr, const char* address) {
     DEBUG_END()
 }
 
-void MONERO_Wallet_setCaFilePath(void* wallet_ptr, const char* path) {
+bool MONERO_Wallet_setCaFilePath(void* wallet_ptr, const char* path) {
     DEBUG_START()
-    lwsf::internal::wallet *wallet = reinterpret_cast<lwsf::internal::wallet*>(wallet_ptr);
-    return wallet->setCaFilePath(std::string(path));
+    Monero::Wallet *wallet = reinterpret_cast<Monero::Wallet*>(wallet_ptr);
+    lwsf::internal::wallet *lwsf_wallet = dynamic_cast<lwsf::internal::wallet*>(wallet);
+    if (!lwsf_wallet)
+        return false;
+    lwsf_wallet->setCaFilePath(std::string(path));
+    return true;
     DEBUG_END()
 }
 

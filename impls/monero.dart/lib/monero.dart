@@ -2237,14 +2237,15 @@ bool Wallet_setProxy(wallet ptr, {required String address}) {
 }
 
 @Deprecated("TODO")
-void Wallet_setCaFilePath(wallet wm_ptr, String path) {
+bool Wallet_setCaFilePath(wallet wm_ptr, String path) {
   debugStart?.call('MONERO_WalletManager_setCaFilePath');
   lib ??= MoneroC(DynamicLibrary.open(libPath));
 
   final path_ = path.toNativeUtf8().cast<Char>();
-  lib!.MONERO_Wallet_setCaFilePath(wm_ptr, path_);
+  final result = lib!.MONERO_Wallet_setCaFilePath(wm_ptr, path_);
   calloc.free(path_);
   debugEnd?.call('MONERO_WalletManager_setCaFilePath');
+  return result;
 }
 
 @Deprecated("TODO")
