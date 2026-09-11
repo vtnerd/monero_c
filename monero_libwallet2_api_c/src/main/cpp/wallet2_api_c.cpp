@@ -1742,6 +1742,26 @@ void* MONERO_Wallet_createTransactionMultDest(void* wallet_ptr, const char* dst_
     DEBUG_END()
 }
 
+uint64_t MONERO_Wallet_estimateTransactionFee(void* wallet_ptr,
+        const char* dst_addr_list, const char* dst_addr_list_separator,
+        const char* amount_list, const char* amount_list_separator,
+        int pendingTransactionPriority) {
+    DEBUG_START()
+    Monero::Wallet *wallet = reinterpret_cast<Monero::Wallet*>(wallet_ptr);
+    auto addrs   = splitStringVector(std::string(dst_addr_list), std::string(dst_addr_list_separator));
+    auto amounts = splitStringUint(std::string(amount_list), std::string(amount_list_separator));
+    std::vector<std::pair<std::string, uint64_t>> destinations;
+    for (size_t i = 0; i < addrs.size() && i < amounts.size(); ++i)
+        destinations.emplace_back(addrs[i], amounts[i]);
+    try {
+        return wallet->estimateTransactionFee(destinations,
+            PendingTransaction_Priority_fromInt(pendingTransactionPriority));
+    } catch (...) {
+        return 0;
+    }
+    DEBUG_END()
+}
+
 void* MONERO_Wallet_createTransaction(void* wallet_ptr, const char* dst_addr, const char* payment_id,
                                                     uint64_t amount, uint32_t mixin_count,
                                                     int pendingTransactionPriority,

@@ -2905,6 +2905,31 @@ PendingTransaction Wallet_createTransactionMultDest(
   return ret;
 }
 
+int Wallet_estimateTransactionFee(
+  wallet wptr, {
+  required List<String> dstAddr,
+  required List<int> amounts,
+  required int pendingTransactionPriority,
+}) {
+  debugStart?.call('MONERO_Wallet_estimateTransactionFee');
+  lib ??= MoneroC(DynamicLibrary.open(libPath));
+  final dst_addr_list = dstAddr.join(defaultSeparatorStr).toNativeUtf8();
+  final amount_list =
+      amounts.map((e) => e.toString()).join(defaultSeparatorStr).toNativeUtf8();
+  final ret = lib!.MONERO_Wallet_estimateTransactionFee(
+    wptr,
+    dst_addr_list.cast(),
+    defaultSeparator,
+    amount_list.cast(),
+    defaultSeparator,
+    pendingTransactionPriority,
+  );
+  calloc.free(dst_addr_list);
+  calloc.free(amount_list);
+  debugEnd?.call('MONERO_Wallet_estimateTransactionFee');
+  return ret;
+}
+
 @Deprecated("TODO")
 PendingTransaction Wallet_createTransaction(wallet ptr,
     {required String dst_addr,

@@ -3482,6 +3482,44 @@ class MoneroC {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
+  int MONERO_Wallet_estimateTransactionFee(
+    ffi.Pointer<ffi.Void> wallet_ptr,
+    ffi.Pointer<ffi.Char> dst_addr_list,
+    ffi.Pointer<ffi.Char> dst_addr_list_separator,
+    ffi.Pointer<ffi.Char> amount_list,
+    ffi.Pointer<ffi.Char> amount_list_separator,
+    int pendingTransactionPriority,
+  ) {
+    return _MONERO_Wallet_estimateTransactionFee(
+      wallet_ptr,
+      dst_addr_list,
+      dst_addr_list_separator,
+      amount_list,
+      amount_list_separator,
+      pendingTransactionPriority,
+    );
+  }
+
+  late final _MONERO_Wallet_estimateTransactionFeePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Uint64 Function(
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Int)>>(
+      'MONERO_Wallet_estimateTransactionFee');
+  late final _MONERO_Wallet_estimateTransactionFee =
+      _MONERO_Wallet_estimateTransactionFeePtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              int)>();
+
   ffi.Pointer<ffi.Void> MONERO_Wallet_createTransaction(
     ffi.Pointer<ffi.Void> wallet_ptr,
     ffi.Pointer<ffi.Char> dst_addr,

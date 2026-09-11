@@ -727,6 +727,10 @@ extern ADDAPI bool MONERO_Wallet_submitTransactionUR(void* wallet_ptr, const cha
 //     virtual void disposeTransaction(PendingTransaction * t) = 0;
 //     virtual uint64_t estimateTransactionFee(const std::vector<std::pair<std::string, uint64_t>> &destinations,
 //                                             PendingTransaction::Priority priority) const = 0;
+extern ADDAPI uint64_t MONERO_Wallet_estimateTransactionFee(void* wallet_ptr,
+                                                const char* dst_addr_list, const char* dst_addr_list_separator,
+                                                const char* amount_list, const char* amount_list_separator,
+                                                int pendingTransactionPriority);
 //     virtual bool hasUnknownKeyImages() const = 0;
 extern ADDAPI bool MONERO_Wallet_hasUnknownKeyImages(void* wallet_ptr);
 //     virtual bool exportKeyImages(const std::string &filename, bool all = false) = 0;
